@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(./gradlew compileKotlin:*)",
+      "Bash(./gradlew jar:*)",
+      "Bash(timeout 5 java:*)",
+      "Bash(curl:*)",
+      "Bash(./gradlew build:*)",
+      "Bash(./gradlew shadowJar:*)"
+    ]
+  }
+}

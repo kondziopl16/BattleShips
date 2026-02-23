@@ -1,15 +1,37 @@
 import ai.RandomAIPlayer
 import ai.SmartAIPlayer
+import client.TournamentClient
 import engine.GameEngine
 import engine.GameRunner
 import logging.GameLogger
 
 fun main(args: Array<String>) {
     when {
+        args.contains("--tournament") -> runTournament(args)
         args.contains("--benchmark") -> runBenchmark()
         args.contains("--stats") -> runStatistics()
         else -> runSingleGame()
     }
+}
+
+fun runTournament(args: Array<String>) {
+    fun argValue(flag: String): String? {
+        val idx = args.indexOf(flag)
+        return if (idx >= 0 && idx + 1 < args.size) args[idx + 1] else null
+    }
+
+    val server = argValue("--server") ?: "http://localhost:8080"
+    val name = argValue("--name") ?: "SmartAI-${(System.currentTimeMillis() % 9000 + 1000)}"
+
+    println("========================================")
+    println("   Battleships Tournament Client")
+    println("========================================")
+    println(" Serwer : $server")
+    println(" Nazwa  : $name")
+    println("========================================")
+    println()
+
+    TournamentClient(server, name).run()
 }
 
 fun runSingleGame() {
